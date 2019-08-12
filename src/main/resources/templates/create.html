@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <form th:action="@{/admin/street/create}" th:method="post" th:object="${street}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Enter street name">
+            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <div class="form-group">
+            <label for="select">Select a district</label>
+            <select id="select" class="form-control" th:field="*{district}">
+                <option th:each="r : ${districts}" th:value="${r.id}" th:text="${r.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Enter description</label>
+            <textarea th:field="*{description}" class="form-control" id="description" rows="3"></textarea>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>
